@@ -11,6 +11,7 @@ private:
     string carrera;
     string sala;
 public:
+    Ramos() = default;
     Ramos(string, string, string);
     string getNombre();
     void setNombre(string);
