@@ -5,3 +5,23 @@ Alumno::Alumno(string _nombre, string _apellido, int _semestre, int _edad) : Per
     semestre = _semestre;
     edad = _edad;
 }
+
+int Alumno::getSemestre()
+{
+    return semestre;
+}
+
+void Alumno::setSemestre(int _semestre)
+{
+    semestre = _semestre;
+}
+
+int Alumno::getEdad()
+{
+    return edad;
+}
+
+void Alumno::setEdad(int _edad)
+{
+    edad = _edad;
+}

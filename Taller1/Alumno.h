@@ -14,7 +14,7 @@ private:
 public:
   Alumno(string, string, int, int);
   int getSemestre();
-  void setSemestre();
+  void setSemestre(int);
   int getEdad();
-  void setEdad();
+  void setEdad(int);
 };

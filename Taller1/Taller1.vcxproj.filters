@@ -27,6 +27,9 @@
     <ClCompile Include="Profesor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Ramos.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Alumno.h">
