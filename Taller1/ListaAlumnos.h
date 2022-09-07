@@ -10,7 +10,7 @@ private:
 	int count;
 public:
 	ListaAlumnos();
-	void addAlumno(Alumno);
+	bool addAlumno(Alumno);
 	Alumno findAlumno();
 
 };
