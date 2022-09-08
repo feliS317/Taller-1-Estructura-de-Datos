@@ -8,8 +8,9 @@ using namespace std;
 class Profesor:public Persona
 {
 private:
-  Ramos ramos[3];
+	Ramos ramos[3];
 public:
-  Profesor(string, string);
+	Profesor() = default;
+	Profesor(string, string);
 
 };

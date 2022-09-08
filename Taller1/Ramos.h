@@ -10,4 +10,13 @@ private:
     string nombre;
     string carrera;
     string sala;
+public:
+    Ramos() = default;
+    Ramos(string, string, string);
+    string getNombre();
+    void setNombre(string);
+    string getCarrera();
+    void setCarrera(string);
+    string getSala();
+    void setSala(string);
 };
