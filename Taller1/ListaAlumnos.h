@@ -12,5 +12,4 @@ public:
 	ListaAlumnos();
 	bool addAlumno(Alumno);
 	Alumno findAlumno();
-
 };
