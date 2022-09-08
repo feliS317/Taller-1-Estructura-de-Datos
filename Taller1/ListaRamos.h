@@ -1,13 +1,14 @@
 #pragma once
-#include "Ramos.h"
+#include "Ramo.h"
 
 class ListaRamos
 {
 private:
-	Ramos ramos[10];
+	Ramo ramos[10];
+	int count = 0;
 public:
 	ListaRamos();
-	void addRamo();
+	bool addRamo(Ramo);
 	void deleteRamo();
-	Ramos findRamo();
+	Ramo findRamo();
 };

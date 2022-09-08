@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 #include "Persona.h"
-#include "Ramos.h"
+#include "Ramo.h"
 using namespace std;
 
 class Alumno:public Persona
@@ -10,7 +10,7 @@ class Alumno:public Persona
 private:
     int semestre;
     int edad;
-    Ramos ramos[5];
+    Ramo ramos[5];
 public:
     Alumno() = default;
     Alumno(string, string, int, int);

@@ -2,13 +2,13 @@
 #include <iostream>
 #include <string>
 #include "Persona.h"
-#include "Ramos.h"
+#include "Ramo.h"
 using namespace std;
 
 class Profesor:public Persona
 {
 private:
-	Ramos ramos[3];
+	Ramo ramos[3];
 public:
 	Profesor() = default;
 	Profesor(string, string);

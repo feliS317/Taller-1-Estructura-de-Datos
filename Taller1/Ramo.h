@@ -4,15 +4,15 @@
 #include "Persona.h"
 using namespace std;
 
-class Ramos
+class Ramo
 {
 private:
     string nombre;
     string carrera;
     string sala;
 public:
-    Ramos() = default;
-    Ramos(string, string, string);
+    Ramo() = default;
+    Ramo(string, string, string);
     string getNombre();
     void setNombre(string);
     string getCarrera();

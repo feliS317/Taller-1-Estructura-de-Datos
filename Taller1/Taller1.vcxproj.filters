@@ -27,7 +27,7 @@
     <ClCompile Include="Profesor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Ramos.cpp">
+    <ClCompile Include="Ramo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ListaAlumnos.cpp">
@@ -50,7 +50,7 @@
     <ClInclude Include="Profesor.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Ramos.h">
+    <ClInclude Include="Ramo.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="ListaAlumnos.h">

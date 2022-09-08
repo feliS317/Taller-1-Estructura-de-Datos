@@ -2,16 +2,23 @@
 
 ListaRamos::ListaRamos(){}
 
-void ListaRamos::addRamo()
+bool ListaRamos::addRamo(Ramo ramo)
 {
+	if (count < 10)
+	{
+		ramos[count] = ramo;
+		count++;
+		return true;
+	}
+	return false;
 }
 
 void ListaRamos::deleteRamo()
 {
 }
 
-Ramos ListaRamos::findRamo()
+Ramo ListaRamos::findRamo()
 {
-	return Ramos();
+	return Ramo();
 }
 

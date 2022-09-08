@@ -134,7 +134,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Persona.cpp" />
     <ClCompile Include="Profesor.cpp" />
-    <ClCompile Include="Ramos.cpp" />
+    <ClCompile Include="Ramo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Alumno.h" />
@@ -143,7 +143,7 @@
     <ClInclude Include="ListaRamos.h" />
     <ClInclude Include="Persona.h" />
     <ClInclude Include="Profesor.h" />
-    <ClInclude Include="Ramos.h" />
+    <ClInclude Include="Ramo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

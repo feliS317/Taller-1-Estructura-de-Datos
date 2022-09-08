@@ -3,28 +3,24 @@
 #include "Persona.h"
 #include "Alumno.h"
 #include "Profesor.h"
-#include "Ramos.h"
+#include "Ramo.h"
 #include "ListaAlumnos.h"
 #include "ListaProfesores.h"
+#include "ListaRamos.h"
 using namespace std;
 
 ListaAlumnos alumnos = ListaAlumnos();
 ListaProfesores profesores = ListaProfesores();
-bool go = true;
+ListaRamos ramos = ListaRamos();
 
-void mainMenu(); // Las funciones deben declararse primero o colocarse el main al final - feli
-bool addData();
+bool addData(); // Las funciones deben declararse primero o colocarse el main al final - feli
 bool createNewAlumno();
+bool createNewProfesor();
+bool createNewRamo();
 
 int main()
 {
-    Ramos ramos[10];   
-    mainMenu();
-    return 0;
-}
-
-void mainMenu()
-{
+    bool go = true;
     while (go)
     {
         int option;
@@ -53,7 +49,7 @@ void mainMenu()
             }
             else
             {
-                cout << "No se ha podido anadir esta informacion\n\n";
+                cout << "No se ha podido anadir esta informacion, se ha llegado al limite de datos de esta caracteristica\n\n";
             }
             break;
         case 3:
@@ -63,6 +59,7 @@ void mainMenu()
             break;
         }
     }
+    return 0;
 }
 
 bool addData()
@@ -89,6 +86,7 @@ bool addData()
         if (createNewProfesor()) { return true; }
         break;
     case 3:
+        if (createNewRamo()) { return true; }
         break;
     }
     return false;
@@ -107,7 +105,7 @@ bool createNewAlumno()
     cin >> apellido;
     cout << "Ingrese el semestre del estudiante\n";
     cin >> semestre;
-    while (!cin.good())
+    while (!cin.good() || semestre < 1)
     {
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -116,15 +114,18 @@ bool createNewAlumno()
     }
     cout << "Ingrese la edad del estudiante\n";
     cin >> edad;
-    while (!cin.good())
+    while (!cin.good() || edad < 1)
     {
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << "Valor invalido, ingrese un numero\n";
         cin >> edad;
     }
-    alumnos.addAlumno(Alumno(nombre, apellido, semestre, edad));
-    return true;
+    if (alumnos.addAlumno(Alumno(nombre, apellido, semestre, edad)))
+    {
+        return true;
+    }
+    return false;
 }
 
 bool createNewProfesor()
@@ -136,7 +137,28 @@ bool createNewProfesor()
     cin >> nombre;
     cout << "Ingrese el apellido del profesor\n";
     cin >> apellido;
-    cout << "Ingrese el semestre del estudiante\n";
-    profesores.addProfesor(Profesor(nombre, apellido));
-    return true;
+    if (profesores.addProfesor(Profesor(nombre, apellido)))
+    {
+        return true;
+    }
+    return false;
+}
+
+bool createNewRamo()
+{
+    string nombre;
+    string carrera;
+    string sala;
+
+    cout << "Ingrese el nombre del ramo\n";
+    cin >> nombre;
+    cout << "Ingrese la carrera a la que pertenece este ramo";
+    cin >> carrera;
+    cout << "Ingrese en que sala se imparte este ramo (puede ser nombre de sala, numero de sala)";
+    cin >> sala;
+    if (ramos.addRamo(Ramo(nombre, carrera, sala)))
+    {
+        return true;
+    }
+    return false;
 }
