@@ -14,5 +14,38 @@ int main()
     alumnos[0] = &a1;
     cout << "1";
 
+    bool Go = true;
+
+    while (Go) {
+
+        cout << "Bienvenido al menú! seleccione una opción"<<endl<<endl<<"1) Agregar Datos"<<endl<<"2) Modificar Datos"<<endl<<"3) Mostrar Datos";
+        char response;
+
+        switch (response){
+        default:
+            break;
+        }
+
+    }
+
     return 0;
 }
+
+void addData() {
+
+
+
+}
+
+void modifyData() {
+
+
+
+}
+
+void showData() {
+
+
+
+}
+
