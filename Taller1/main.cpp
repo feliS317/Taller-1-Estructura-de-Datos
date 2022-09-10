@@ -13,7 +13,66 @@ ListaAlumnos alumnos = ListaAlumnos();
 ListaProfesores profesores = ListaProfesores();
 ListaRamos ramos = ListaRamos();
 
-bool createNewAlumno()
+bool askRamo()
+{
+    return true;
+}
+
+bool askAlumno()
+{
+    return true;
+}
+
+bool askProfesor()
+{
+    return true;
+}
+
+void askData()
+{
+    int option;
+    cout << "\nQue desea consultar?\n"
+        "1. Un alumno\n"
+        "2. Un profesor\n"
+        "3. Un ramo\n";
+    cin >> option;
+    while (!cin.good() || option > 4)
+    {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cout << "Valor invalido, ingrese otro valor\n";
+        cin >> option;
+    }
+    switch (option)
+    {
+    case 1:
+        if (askAlumno()) {
+            cout << "Anadido correctamente\n\n";
+            break;
+        }
+        cout << "Ese alumno no existe\n\n";
+        break;
+    case 2:
+        if (askProfesor())
+        {
+            cout << "Anadido correctamente\n\n";
+            break;
+        }
+        cout << "Ese profesor no existe\n\n";
+        break;
+    case 3:
+        if (askRamo())
+        {
+            cout << "Anadido correctamente\n\n";
+            break;
+        }
+        cout << "Ese ramo no existe\n\n";
+        break;
+    }
+
+}
+
+bool addNewAlumno()
 {
     string nombre;
     string apellido;
@@ -49,7 +108,7 @@ bool createNewAlumno()
     return false;
 }
 
-bool createNewProfesor()
+bool addNewProfesor()
 {
     string nombre;
     string apellido;
@@ -65,7 +124,7 @@ bool createNewProfesor()
     return false;
 }
 
-bool createNewRamo()
+bool addNewRamo()
 {
     string nombre;
     string carrera;
@@ -102,13 +161,13 @@ bool addData()
     switch (option)
     {
     case 1:
-        if (createNewAlumno()) { return true; }
+        if (addNewAlumno()) { return true; }
         break;
     case 2:
-        if (createNewProfesor()) { return true; }
+        if (addNewProfesor()) { return true; }
         break;
     case 3:
-        if (createNewRamo()) { return true; }
+        if (addNewRamo()) { return true; }
         break;
     }
     return false;
@@ -137,16 +196,15 @@ int main()
         switch (option)
         {
         case 1:
+            askData();
             break;
         case 2:
             if (addData())
             {
                 cout << "Anadido correctamente\n\n";
+                break;
             }
-            else
-            {
-                cout << "No se ha podido anadir esta informacion, se ha llegado al limite de datos de esta caracteristica\n\n";
-            }
+            cout << "No se ha podido anadir esta informacion, se ha llegado al limite de datos de esta caracteristica\n\n";
             break;
         case 3:
             break;
