@@ -11,5 +11,6 @@ private:
 public:
 	ListaAlumnos();
 	bool addAlumno(Alumno);
-	Alumno findAlumno();
+	bool compare(Alumno, Alumno);
+	Alumno findAlumno(ListaAlumnos*& listaAlumnos, Alumno*& alumno);
 };

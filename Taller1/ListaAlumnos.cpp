@@ -17,7 +17,21 @@ bool ListaAlumnos::addAlumno(Alumno alumno)
 
 }
 
-Alumno ListaAlumnos::findAlumno()
+bool ListaAlumnos::compare(Alumno alumno1, Alumno alumno2) {
+
+	
+
+}
+
+Alumno ListaAlumnos::findAlumno(ListaAlumnos* &listaAlumnos, Alumno* &alumno) // Cómo comparo las dos weas .-.
 {
+	for (int i = 0; i < count; i++) {
+		if (compare(listaAlumnos.[i],alumno) {
+		
+			return Alumno();
+		}
+	}
+
 	return Alumno();
 }
+
