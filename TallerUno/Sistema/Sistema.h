@@ -33,4 +33,8 @@ public:
 	bool SePuedeIngresarAlumno(); // Pregunta si es posible añadir un nuevo alumno
 	bool SePuedeIngresarProfesor(); // Pregunta si es posible añadir un nuevo profesor
 	bool SePuedeIngresarRamo(); // Pregunta si es posible añadir un nuevo ramo
+
+	Alumno* ConsultarAlumno(string); // Consulta por un alumno y devuelve su puntero
+	Profesor* ConsultarProfesor(string); // Consulta por un profesor y devuelve su puntero
+	Ramo* ConsultarRamo(string); // Consulta por un ramo y devuelve su puntero
 };

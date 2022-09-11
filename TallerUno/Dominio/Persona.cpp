@@ -24,3 +24,8 @@ void Persona::setApellido(string _apellido)
 {
     apellido = _apellido;
 }
+
+string Persona::getNombreCompleto()
+{
+    return nombre + " " + apellido;
+}

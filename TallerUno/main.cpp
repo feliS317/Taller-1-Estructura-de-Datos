@@ -107,15 +107,64 @@ void agregarDato()
 }
 
 void consultarAlumno() {
-	sistema.alarm("Esta opcion aun no esta implementada");
+	string queryBusqueda = sistema.StringInput("Ingrese el nombre completo del alumno a buscar: ");
+	Alumno* busquedaAlumno = sistema.ConsultarAlumno(queryBusqueda);
+
+	sistema.cleanConsole();
+
+	if (!busquedaAlumno) {
+		sistema.alarm("No se ha encontrado al alumno especificado.");
+	}
+	else {
+		Alumno alumnoEncontrado = *busquedaAlumno;
+
+		sistema.print("== Mostrando Datos del Alumno ==");
+		sistema.print("Nombre: " + alumnoEncontrado.getNombreCompleto());
+		sistema.print("Edad: " + std::to_string(alumnoEncontrado.getEdad()));
+		sistema.print("Semestre: " + std::to_string(alumnoEncontrado.getSemestre()));
+
+		sistema.alarm("");
+	}
 }
 
 void consultarProfesor() {
-	sistema.alarm("Esta opcion aun no esta implementada");
+	string queryBusqueda = sistema.StringInput("Ingrese el nombre completo del profesor a buscar: ");
+	Profesor* busquedaProfesor = sistema.ConsultarProfesor(queryBusqueda);
+
+	sistema.cleanConsole();
+
+	if (!busquedaProfesor) {
+		sistema.alarm("No se ha encontrado al profesor especificado.");
+	}
+	else {
+		Profesor profesorEncontrado = *busquedaProfesor;
+
+		sistema.print("== Mostrando Datos del Profesor ==");
+		sistema.print("Nombre: " + profesorEncontrado.getNombreCompleto());
+
+		sistema.alarm("");
+	}
 }
 
 void consultarRamo() {
-	sistema.alarm("Esta opcion aun no esta implementada");
+	string queryBusqueda = sistema.StringInput("Ingrese el nombre del ramo a buscar: ");
+	Ramo* busquedaRamo = sistema.ConsultarRamo(queryBusqueda);
+
+	sistema.cleanConsole();
+
+	if (!busquedaRamo) {
+		sistema.alarm("No se ha encontrado el ramo especificado.");
+	}
+	else {
+		Ramo ramoEncontrado = *busquedaRamo;
+
+		sistema.print("== Mostrando Datos del Ramo ==");
+		sistema.print("Nombre: " + ramoEncontrado.getNombre());
+		sistema.print("Carrera: " + ramoEncontrado.getCarrera());
+		sistema.print("Sala: " + ramoEncontrado.getSala());
+
+		sistema.alarm("");
+	}
 }
 
 void realizarConsulta()
@@ -145,6 +194,9 @@ void realizarConsulta()
 int main()
 {
 	int option = 0;
+;
+	sistema.IngresarAlumno("Cesar", "Munoz", 4, 20);
+	sistema.IngresarAlumno("Hariette", "Diaz", 2, 19);
 
 	while (option != 4)
 	{

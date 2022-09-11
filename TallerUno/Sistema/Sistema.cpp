@@ -10,9 +10,12 @@ using std::string;
 using std::cout;
 using std::cin;
 using std::endl;
+using std::getline;
+using std::isdigit;
 
 /*
 	Escribe una línea por consola. El output incluye salto de línea.
+	
 	@param text Texto a escribir.
  */
 void Sistema::print(string text)
@@ -22,10 +25,14 @@ void Sistema::print(string text)
 
 void Sistema::alarm(string text)
 {
-	cout << "\n" + text << endl; // Imprime el texto de alarma
+	if (text != "") { // Si hay texto que imprimir
+		cout << "\n" + text << endl; // Imprime el texto de alarma
+	}
+
 	cout << "Presione [Enter] para continuar..."; // Pide un input al usuario
-	cin.get(); // Espera por una entrada
-	cin.ignore(1000, '\n'); // Limpia el buffer
+
+	string placeholder; // Crea una variable para almacenar un texto arbitrario
+	getline(cin, placeholder); // Espera por una entrada
 }
 
 /*
@@ -70,8 +77,13 @@ string Sistema::StringInput(string text)
 {
 	string entrada; // Declara una variable de entrada
 	cout << text; // Muestra un texto por pantalla
-	cin.ignore(1000, '\n');
-	cin >> entrada; // Pregunta por consola
+	getline(cin, entrada); // Pregunta por consola
+
+	while (entrada == "") { // Mientras sea una entrada nula
+		cout << text; // Muestra un texto por pantalla
+		getline(cin, entrada); // Pregunta por consola
+	}
+
 	return entrada; // Devuelve el texto ingresado
 }
 
@@ -81,18 +93,22 @@ string Sistema::StringInput(string text)
 */
 int Sistema::IntInput(string text)
 {
-	int entrada; // Declara una variable de entrada
-	cout << text; // Muestra un texto por pantalla
-	cin >> entrada; // Pregunta por consola
+	bool entradaEsDigito = false; // Al comienzo se toma el input invalido
+	string entrada = StringInput(text); // Declara una variable de entrada
+	
+	while (!entradaEsDigito) { // Si no es un dato numérico
+		entradaEsDigito = true; // Decimos que el input es valido
 
-	while (!cin.good()) { // Si no es un dato numérico
-		cin.clear(); // Limpia la entrada inicial
-		cin.ignore(10000, '\n'); // Limpia restos del buffer
-		cout << "Valor invalido. " + text;  // Muestra un texto por pantalla
-		cin >> entrada; // Pregunta por consola
+		for (char const& ch : entrada) { // Por cada caracter del string
+			if (!isdigit(ch)) { // Si ese caracter no es digito
+				entrada = StringInput("Valor invalido. " + text); // Pregunta otra vez
+				entradaEsDigito = false; // El string no paso la prueba
+				break; // Paramos el ciclo
+			}
+		}
 	}
 	
-	return entrada; // Devuelve el integer ingresado
+	return stoi(entrada); // Devuelve el integer ingresado
 }
 
 /*
@@ -144,4 +160,76 @@ bool Sistema::SePuedeIngresarProfesor()
 bool Sistema::SePuedeIngresarRamo()
 {
 	return !ramos.isFull();
+}
+
+/*
+	Consulta por un alumno en el sistema. En caso de no encontrarlo, devuelve la referencia a null.
+	@param nombre Nombre del alumno a buscar
+	@return Alumno encontrado
+*/
+Alumno* Sistema::ConsultarAlumno(string nombre)
+{
+	Alumno* alumnoEncontrado = nullptr;
+
+	if (alumnos.cacheExists() && alumnos.getCache().getNombreCompleto() == nombre) { // Si el alumno estaba cacheado
+		alumnoEncontrado = &alumnos.getCache(); // Obtenemos la referencia del cache
+	}
+	else { // En caso contrario
+		for (int i = 0; i < alumnos.length; i++) { // Iteramos sobre la lista
+			if (alumnos[i].getNombreCompleto() == nombre) { // Si coincide el nombre
+				alumnoEncontrado = &alumnos[i]; // Obtenemos la referencia del elemento
+				break; // Rompemos el ciclo
+			}
+		}
+	}
+
+	return alumnoEncontrado; // Devolvemos la referencia
+}
+
+/*
+	Consulta por un profesor en el sistema. En caso de no encontrarlo, devuelve la referencia a null.
+	@param nombre Nombre del profesor a buscar
+	@return Profesor encontrado
+*/
+Profesor* Sistema::ConsultarProfesor(string nombre)
+{
+	Profesor* profesorEncontrado = nullptr;
+
+	if (profesores.cacheExists() && profesores.getCache().getNombreCompleto() == nombre) { // Si el profesor estaba cacheado
+		profesorEncontrado = &profesores.getCache();  // Obtenemos la referencia del cache
+	} 
+	else {
+		for (int i = 0; i < profesores.length; i++) { // Iteramos sobre la lista
+			if (profesores[i].getNombreCompleto() == nombre) { // Si coincide el nombre
+				profesorEncontrado = &profesores[i]; // Obtenemos la referencia del elemento
+				break; // Rompemos el ciclo
+			}
+		}
+	}
+
+	return profesorEncontrado; // Devolvemos la referencia
+}
+
+/*
+	Consulta por un ramo en el sistema. En caso de no encontrarlo, devuelve la referencia a null.
+	@param nombre Nombre del ramo a buscar
+	@return Ramo encontrado
+*/
+Ramo* Sistema::ConsultarRamo(string nombre)
+{
+	Ramo* ramoEncontrado = nullptr;
+
+	if (ramos.cacheExists() && ramos.getCache().getNombre() == nombre) { // Si el ramo estaba cacheado
+		ramoEncontrado = &ramos.getCache(); // Obtenemos la referencia del cache
+	}
+	else {
+		for (int i = 0; i < ramos.length; i++) { // Iteramos sobre la lista
+			if (ramos[i].getNombre() == nombre) { // Si coincide el nombre
+				ramoEncontrado = &ramos[i]; // Obtenemos la referencia del elemento
+				break; // Rompemos el ciclo
+			}
+		}
+	}
+
+	return ramoEncontrado; // Devolvemos la referencia
 }

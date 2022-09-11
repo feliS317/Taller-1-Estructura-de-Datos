@@ -16,4 +16,5 @@ public:
 	void setNombre(string);
 	string getApellido();
 	void setApellido(string);
+	string getNombreCompleto();
 };
