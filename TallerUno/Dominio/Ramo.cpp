@@ -1,4 +1,7 @@
 #include "Ramo.h"
+#include "string"
+
+using std::string;
 
 Ramo::Ramo(string _nombre, string _carrera, string _sala)
 {
@@ -6,26 +9,32 @@ Ramo::Ramo(string _nombre, string _carrera, string _sala)
 	carrera = _carrera;
 	sala = _sala;
 }
+
 string Ramo::getNombre()
 {
 	return nombre;
 }
+
 void Ramo::setNombre(string _nombre)
 {
 	nombre = _nombre;
 }
+
 string Ramo::getCarrera()
 {
 	return carrera;
 }
+
 void Ramo::setCarrera(string _carrera)
 {
 	carrera = _carrera;
 }
+
 string Ramo::getSala()
 {
 	return sala;
 }
+
 void Ramo::setSala(string _sala)
 {
 	sala = _sala;

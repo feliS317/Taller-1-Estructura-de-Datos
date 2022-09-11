@@ -1,4 +1,7 @@
 #include "Persona.h"
+#include "string"
+
+using std::string;
 
 Persona::Persona(string _nombre, string _apellido)
 {

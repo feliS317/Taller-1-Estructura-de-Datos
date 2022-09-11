@@ -1,16 +1,18 @@
 #pragma once
 #include <iostream>
 #include <string>
+
 #include "Persona.h"
 #include "Ramo.h"
-using namespace std;
+#include "../Sistema/Vector.h"
 
-class Profesor:public Persona
+using std::string;
+
+class Profesor : public Persona
 {
 private:
-	Ramo ramos[3];
+	Vector<Ramo> ramos = Vector<Ramo>(3);
 public:
 	Profesor() = default;
 	Profesor(string, string);
-
 };

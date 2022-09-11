@@ -1,4 +1,7 @@
 #include "Alumno.h"
+#include "string"
+
+using std::string;
 
 Alumno::Alumno(string _nombre, string _apellido, int _semestre, int _edad) : Persona(_nombre, _apellido)
 {

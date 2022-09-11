@@ -1,8 +1,8 @@
 #pragma once
 #include <iostream>
-#include <string>
-#include "Persona.h"
-using namespace std;
+#include "string"
+
+using std::string;
 
 class Ramo
 {

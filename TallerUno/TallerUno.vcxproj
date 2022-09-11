@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{8edefb5e-9a31-48d5-8500-3d4581a1069e}</ProjectGuid>
-    <RootNamespace>Taller1</RootNamespace>
+    <ProjectGuid>{9d618a45-0466-48cb-9381-1eefa858b8b4}</ProjectGuid>
+    <RootNamespace>TallerUno</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -127,23 +127,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Alumno.cpp" />
-    <ClCompile Include="ListaAlumnos.cpp" />
-    <ClCompile Include="ListaProfesores.cpp" />
-    <ClCompile Include="ListaRamos.cpp" />
+    <ClCompile Include="Dominio\Alumno.cpp" />
+    <ClCompile Include="Dominio\Persona.cpp" />
+    <ClCompile Include="Dominio\Profesor.cpp" />
+    <ClCompile Include="Dominio\Ramo.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Persona.cpp" />
-    <ClCompile Include="Profesor.cpp" />
-    <ClCompile Include="Ramo.cpp" />
+    <ClCompile Include="Sistema\Sistema.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Alumno.h" />
-    <ClInclude Include="ListaAlumnos.h" />
-    <ClInclude Include="ListaProfesores.h" />
-    <ClInclude Include="ListaRamos.h" />
-    <ClInclude Include="Persona.h" />
-    <ClInclude Include="Profesor.h" />
-    <ClInclude Include="Ramo.h" />
+    <ClInclude Include="Dominio\Alumno.h" />
+    <ClInclude Include="Dominio\Persona.h" />
+    <ClInclude Include="Dominio\Profesor.h" />
+    <ClInclude Include="Dominio\Ramo.h" />
+    <ClInclude Include="Sistema\Sistema.h" />
+    <ClInclude Include="Sistema\Vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
