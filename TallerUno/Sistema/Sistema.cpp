@@ -111,13 +111,53 @@ int Sistema::IntInput(string text)
 	return stoi(entrada); // Devuelve el integer ingresado
 }
 
+bool Sistema::BoolInput(string text)
+{
+	bool entradaValida = false; // Al comienzo se toma el input invalido
+	string entrada = StringInput(text); // Declara una variable de entrada
+
+	while (!entradaValida) { // Si no es un dato numérico
+		entradaValida = true; // Decimos que el input es valido
+		if (text == "Si")
+		{
+			return true;
+		}
+		else if (text == "No")
+		{
+			return false;
+		}
+		else
+		{   // Si no dio una de las 2 respuestas de arriba
+			entrada = StringInput("Valor invalido. " + text); // Pregunta otra vez
+			entradaValida = false; // El string no paso la prueba
+		}
+	}
+}
+
+/*
+	Añade ramos a Alumno o Profesor
+*/
+void Sistema::AgregarRamos()
+{
+	alarm("Esta opcion aun no esta implementada");
+}
+
 /*
 	Crea un nuevo alumno y lo añade al sistema
 */
 void Sistema::IngresarAlumno(string nombre, string apellido, int semestre, int edad)
 {
-	Alumno alumno = Alumno(nombre, apellido, semestre, edad); // Crea un nuevo alumno
-	alumnos.add(alumno); // Añade el alumno
+	if (edad > 0 && edad < 120 && semestre > 0 && semestre < 31){
+		Alumno alumno = Alumno(nombre, apellido, semestre, edad); // Crea un nuevo alumno
+		alumnos.add(alumno); // Añade el alumno
+		string boolRamos = StringInput("Desea agregar inmediatamente los ramos? Responda Si o No");
+		if (BoolInput(boolRamos)) {
+			AgregarRamos();
+		}
+	}
+	else{
+		alarm("La edad o el semestre del Alumno no es valida (la edad debe estar entre 1 y 120, y el semestre debe estar entre 1 y 30");
+	}
 }
 
 /*

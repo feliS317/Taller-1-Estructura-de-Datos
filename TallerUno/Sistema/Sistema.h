@@ -25,6 +25,9 @@ public:
 	int MostrarMenu(string titulo, string opciones[], int size); // Muestra un menú por pantalla
 	string StringInput(string texto); // Permite la entrada de un string por consola
 	int IntInput(string); // Permite la entrada de un integer por consola
+	bool BoolInput(string texto); // Permite la entrada de un string por consola y devuelve un bool
+
+	void AgregarRamos(); // Agrega ramos a alumno o profesor
 
 	void IngresarAlumno(string, string, int, int); // Ingresa un nuevo alumno al sistema
 	void IngresarProfesor(string, string); // Ingresa un nuevo profesor al sistema
