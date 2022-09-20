@@ -3,6 +3,7 @@
 #include <string>
 
 #include "Vector.h"
+#include "../Dominio/Persona.h"
 #include "../Dominio/Alumno.h"
 #include "../Dominio/Profesor.h"
 #include "../Dominio/Ramo.h"
@@ -27,7 +28,7 @@ public:
 	int IntInput(string); // Permite la entrada de un integer por consola
 	bool BoolInput(string texto); // Permite la entrada de un string por consola y devuelve un bool
 
-	void AgregarRamos(); // Agrega ramos a alumno o profesor
+	void AgregarRamos(Persona*); // Agrega ramos a alumno o profesor
 
 	void IngresarAlumno(string, string, int, int); // Ingresa un nuevo alumno al sistema
 	void IngresarProfesor(string, string); // Ingresa un nuevo profesor al sistema

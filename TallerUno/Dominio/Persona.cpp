@@ -29,3 +29,18 @@ string Persona::getNombreCompleto()
 {
     return nombre + " " + apellido;
 }
+
+int Persona::getRamosTomados()
+{
+    return ramosTomados;
+}
+
+void Persona::setRamosTomados(int _ramosTomados)
+{
+    ramosTomados = _ramosTomados;
+}
+
+bool Persona::addRamo(Ramo)
+{
+    return false;
+}

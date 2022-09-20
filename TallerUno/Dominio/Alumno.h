@@ -21,4 +21,5 @@ public:
 	void setSemestre(int);
 	int getEdad();
 	void setEdad(int);
+	bool addRamo(Ramo);
 };

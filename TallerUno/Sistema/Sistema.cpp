@@ -116,19 +116,19 @@ bool Sistema::BoolInput(string text)
 	bool entradaValida = false; // Al comienzo se toma el input invalido
 	string entrada = StringInput(text); // Declara una variable de entrada
 
-	while (!entradaValida) { // Si no es un dato numérico
+	while (!entradaValida) { // Si la respuesta no fue ni Si ni No
 		entradaValida = true; // Decimos que el input es valido
-		if (text == "Si")
+		if (entrada == "Si")
 		{
 			return true;
 		}
-		else if (text == "No")
+		else if (entrada == "No")
 		{
 			return false;
 		}
 		else
 		{   // Si no dio una de las 2 respuestas de arriba
-			entrada = StringInput("Valor invalido. " + text); // Pregunta otra vez
+			entrada = StringInput("Valor invalido. "); // Pregunta otra vez
 			entradaValida = false; // El string no paso la prueba
 		}
 	}
@@ -137,7 +137,7 @@ bool Sistema::BoolInput(string text)
 /*
 	Añade ramos a Alumno o Profesor
 */
-void Sistema::AgregarRamos()
+void Sistema::AgregarRamos(Persona* persona)
 {
 	alarm("Esta opcion aun no esta implementada");
 }
@@ -150,9 +150,8 @@ void Sistema::IngresarAlumno(string nombre, string apellido, int semestre, int e
 	if (edad > 0 && edad < 120 && semestre > 0 && semestre < 31){
 		Alumno alumno = Alumno(nombre, apellido, semestre, edad); // Crea un nuevo alumno
 		alumnos.add(alumno); // Añade el alumno
-		string boolRamos = StringInput("Desea agregar inmediatamente los ramos? Responda Si o No");
-		if (BoolInput(boolRamos)) {
-			AgregarRamos();
+		if (BoolInput("Desea agregar inmediatamente los ramos? Responda Si o No. ")) {
+			AgregarRamos(&alumno);
 		}
 	}
 	else{

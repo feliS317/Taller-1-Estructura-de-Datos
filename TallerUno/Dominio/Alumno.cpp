@@ -28,3 +28,14 @@ void Alumno::setEdad(int _edad)
 {
     edad = _edad;
 }
+
+bool Alumno::addRamo(Ramo ramo)
+{
+    if (ramosTomados >= ramos.length)
+    {
+        return false;
+    }
+    ramos[ramosTomados] = ramo;
+    ramosTomados++;
+    return true;
+}

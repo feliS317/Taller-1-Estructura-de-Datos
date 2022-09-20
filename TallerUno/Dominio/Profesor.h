@@ -15,4 +15,5 @@ private:
 public:
 	Profesor() = default;
 	Profesor(string, string);
+	bool addRamo(Ramo);
 };
