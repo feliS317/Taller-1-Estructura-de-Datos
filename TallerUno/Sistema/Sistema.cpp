@@ -70,6 +70,31 @@ int Sistema::MostrarMenu(string titulo, string opciones[], int size) {
 }
 
 /*
+	Muestra el menú de seleccion de ramos por pantalla.
+	@param titulo Título del menú.
+	@return Opción seleccionada por el usuario.
+*/
+Ramo* Sistema::MostrarMenuRamos(string titulo) {
+	cleanConsole(); // Limpia la consola
+	print(titulo); // Imprime el título
+
+	for (int i = 0; i < ramos.length; i++) { // Imprime las opciones
+		print("[" + std::to_string(i + 1) + "] " + ramos[i].getNombre() + "  Carrera: " + ramos[i].getCarrera() + "  Sala: " + ramos[i].getSala());
+	}
+	print("[" + std::to_string(ramos.length + 1) + "] No tomar ninguno");
+
+	int value = IntInput("Ingrese una opcion: "); // Toma un input
+
+	while (value < 1 || value > ramos.length+1) { // Validación de opción
+		value = IntInput("Opcion Invalida. Ingrese otra opcion: ");
+	}
+	if (value == ramos.length + 1) {
+		return NULL;
+	}
+	return &ramos[value-1];
+}
+
+/*
 	Permite la entrada de un string por consola
 	@param text Texto de salida.
 */
@@ -139,7 +164,10 @@ bool Sistema::BoolInput(string text)
 */
 void Sistema::AgregarRamos(Persona* persona)
 {
-	alarm("Esta opcion aun no esta implementada");
+	Ramo* option;
+
+	option = MostrarMenuRamos("== Ramo a agregar ==");
+	
 }
 
 /*

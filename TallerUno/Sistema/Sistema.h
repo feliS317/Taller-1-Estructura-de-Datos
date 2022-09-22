@@ -24,6 +24,7 @@ public:
 	void cleanConsole(); // Permite limpiar la consola
 
 	int MostrarMenu(string titulo, string opciones[], int size); // Muestra un menú por pantalla
+	Ramo* MostrarMenuRamos(string titulo); // Muestra el menu de seleccion de ramos
 	string StringInput(string texto); // Permite la entrada de un string por consola
 	int IntInput(string); // Permite la entrada de un integer por consola
 	bool BoolInput(string texto); // Permite la entrada de un string por consola y devuelve un bool
