@@ -154,6 +154,12 @@ void consultarAlumno() {
 		sistema.print("Semestre: " + std::to_string(alumnoEncontrado.getSemestre()));
 
 		sistema.alarm("");
+		if (busquedaAlumno->getRamos().length > 0) {
+			if (sistema.BoolInput("Desea consultar la informacion de los ramos del Alumno? Responda Si o No. "))
+			{
+				sistema.ListaRamos(busquedaAlumno);
+			}
+		}
 	}
 }
 
@@ -173,6 +179,12 @@ void consultarProfesor() {
 		sistema.print("Nombre: " + profesorEncontrado.getNombreCompleto());
 
 		sistema.alarm("");
+		if (busquedaProfesor->getRamos().length > 0) {
+			if (sistema.BoolInput("Desea consultar la informacion de los ramos del Profesor? Responda Si o No. "))
+			{
+				sistema.ListaRamos(busquedaProfesor);
+			}
+		}
 	}
 }
 

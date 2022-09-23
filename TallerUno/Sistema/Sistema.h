@@ -30,6 +30,7 @@ public:
 	int IntInput(string); // Permite la entrada de un integer por consola
 	bool BoolInput(string texto); // Permite la entrada de un string por consola y devuelve un bool
 
+	void ListaRamos(Persona*); // Entrega la lista de ramos de un alumno o profesor
 	void AgregarRamos(Persona*); // Agrega ramos a alumno o profesor
 
 	void IngresarAlumno(string, string, int, int); // Ingresa un nuevo alumno al sistema

@@ -192,6 +192,16 @@ bool Sistema::BoolInput(string text)
 	}
 }
 
+void Sistema::ListaRamos(Persona* persona)
+{
+	cleanConsole(); // Limpia la consola
+	print("== Lista de Ramos de " + persona->getNombreCompleto() + " =="); // Imprime el título
+
+	for (int i = 0; i < persona->getRamos().length; i++) { // Imprime las opciones
+		print("[" + std::to_string(i + 1) + "] " + persona->getRamos()[i]->getNombre() + "  Carrera: " + persona->getRamos()[i]->getCarrera() + "  Sala: " + persona->getRamos()[i]->getSala());
+	}
+}
+
 /*
 	Añade ramos a Alumno o Profesor
 	@param persona Alumno o Profesor a agregarle ramos.

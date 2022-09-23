@@ -33,5 +33,5 @@ string Persona::getNombreCompleto()
 
 Vector<Ramo*> Persona::getRamos()
 {
-    return Vector<Ramo*>(1);
+    return Vector<Ramo*>(0);
 }
