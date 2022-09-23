@@ -1,4 +1,5 @@
 #include "Persona.h"
+#include "../Sistema/Vector.h"
 #include "string"
 
 using std::string;
@@ -30,17 +31,7 @@ string Persona::getNombreCompleto()
     return nombre + " " + apellido;
 }
 
-int Persona::getRamosTomados()
+Vector<Ramo*> Persona::getRamos()
 {
-    return ramosTomados;
-}
-
-void Persona::setRamosTomados(int _ramosTomados)
-{
-    ramosTomados = _ramosTomados;
-}
-
-bool Persona::addRamo(Ramo)
-{
-    return false;
+    return Vector<Ramo*>(1);
 }

@@ -11,9 +11,9 @@ using std::string;
 class Profesor : public Persona
 {
 private:
-	Vector<Ramo> ramos = Vector<Ramo>(3);
+	Vector<Ramo*> ramos = Vector<Ramo*>(3);
 public:
 	Profesor() = default;
 	Profesor(string, string);
-	bool addRamo(Ramo);
+	Vector<Ramo*> getRamos();
 };

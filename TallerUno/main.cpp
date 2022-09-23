@@ -6,22 +6,52 @@ using namespace std;
 Sistema sistema = Sistema();
 
 void modificarEliminarAlumno() {
-	sistema.alarm("Esta opcion aun no esta implementada");
+	string queryBusqueda = sistema.StringInput("Ingrese el nombre completo del alumno a modificar o eliminar: ");
+	Alumno* busquedaAlumno = sistema.ConsultarAlumno(queryBusqueda);
+
+	sistema.cleanConsole();
+
+	if (!busquedaAlumno) {
+		sistema.alarm("No se ha encontrado al alumno especificado.");
+	}
+	else {
+		sistema.ModificarAlumno(busquedaAlumno);
+	}
 }
 
 void modificarEliminarProfesor() {
-	sistema.alarm("Esta opcion aun no esta implementada");
+	string queryBusqueda = sistema.StringInput("Ingrese el nombre completo del profesor a modificar o eliminar: ");
+	Profesor* busquedaProfesor = sistema.ConsultarProfesor(queryBusqueda);
+
+	sistema.cleanConsole();
+
+	if (!busquedaProfesor) {
+		sistema.alarm("No se ha encontrado al profesor especificado.");
+	}
+	else {
+		sistema.ModificarProfesor(busquedaProfesor);
+	}
 }
 
 void modificarEliminarRamo() {
-	sistema.alarm("Esta opcion aun no esta implementada");
+	string queryBusqueda = sistema.StringInput("Ingrese el nombre del ramo a modificar o eliminar: ");
+	Ramo* busquedaRamo = sistema.ConsultarRamo(queryBusqueda);
+
+	sistema.cleanConsole();
+
+	if (!busquedaRamo) {
+		sistema.alarm("No se ha encontrado el ramo especificado.");
+	}
+	else {
+		sistema.ModificarRamo(busquedaRamo);
+	}
 }
 
 void modificarEliminarDato() {
 	int option = 0;
 
 	while (option != 4) {
-		option = sistema.MostrarMenu("== Modificar o Elimiar Elemento ==", new string[4]{
+		option = sistema.MostrarMenu("== Modificar o Eliminar Elemento ==", new string[4]{
 			"Alumno",
 			"Profesor",
 			"Ramo",
@@ -197,6 +227,9 @@ int main()
 ;
 	sistema.IngresarAlumno("Cesar", "Munoz", 4, 20);
 	sistema.IngresarAlumno("Hariette", "Diaz", 2, 19);
+	sistema.IngresarRamo("Estructura de Datos", "ICCI", "Sala Y-103");
+	sistema.IngresarRamo("Estadistica", "ICI", "Sala X-104");
+	sistema.IngresarRamo("Dinamica", "ICCI", "Sala X1-30");
 
 	while (option != 4)
 	{

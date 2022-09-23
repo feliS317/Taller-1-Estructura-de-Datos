@@ -70,28 +70,56 @@ int Sistema::MostrarMenu(string titulo, string opciones[], int size) {
 }
 
 /*
+	Devuelve los ramos que la Persona aun no ha tomado.
+	@param persona La persona a chequear.
+	@return Los ramos aun no tomados.
+*/
+Vector<Ramo*> Sistema::RamosDisponibles(Persona* persona)
+{
+	bool found;
+	Vector<Ramo*> ramosNoTomados = Vector<Ramo*>(10);
+	for (int i = 0; i < ramos.length; i++)
+	{
+		found = false;
+		for (int j = 0; j < persona->getRamos().length; j++)
+		{
+			if (&ramos[i] == persona->getRamos()[j])
+			{
+				found = true;
+				break;
+			}
+		}
+		if (!found)
+		{
+			ramosNoTomados.add(&ramos[i]);
+		}
+	}
+	return ramosNoTomados;
+}
+
+/*
 	Muestra el menú de seleccion de ramos por pantalla.
 	@param titulo Título del menú.
 	@return Opción seleccionada por el usuario.
 */
-Ramo* Sistema::MostrarMenuRamos(string titulo) {
+Ramo* Sistema::MostrarMenuRamos(string titulo, Vector<Ramo*> ramosNoTomados) {
 	cleanConsole(); // Limpia la consola
 	print(titulo); // Imprime el título
 
-	for (int i = 0; i < ramos.length; i++) { // Imprime las opciones
-		print("[" + std::to_string(i + 1) + "] " + ramos[i].getNombre() + "  Carrera: " + ramos[i].getCarrera() + "  Sala: " + ramos[i].getSala());
+	for (int i = 0; i < ramosNoTomados.length; i++) { // Imprime las opciones
+		print("[" + std::to_string(i + 1) + "] " + ramosNoTomados[i]->getNombre() + "  Carrera: " + ramosNoTomados[i]->getCarrera() + "  Sala: " + ramosNoTomados[i]->getSala());
 	}
-	print("[" + std::to_string(ramos.length + 1) + "] No tomar ninguno");
+	print("[" + std::to_string(ramosNoTomados.length + 1) + "] No tomar ninguno");
 
 	int value = IntInput("Ingrese una opcion: "); // Toma un input
 
-	while (value < 1 || value > ramos.length+1) { // Validación de opción
+	while (value < 1 || value > ramosNoTomados.length+1) { // Validación de opción
 		value = IntInput("Opcion Invalida. Ingrese otra opcion: ");
 	}
-	if (value == ramos.length + 1) {
+	if (value == ramosNoTomados.length + 1) {
 		return NULL;
 	}
-	return &ramos[value-1];
+	return ramosNoTomados[value-1];
 }
 
 /*
@@ -136,6 +164,11 @@ int Sistema::IntInput(string text)
 	return stoi(entrada); // Devuelve el integer ingresado
 }
 
+/*
+	Permite la entrada de un string por consola y dependiendo de su resultado devuelve un bool
+	@param text Titulo de Input.
+	@return True o False.
+*/
 bool Sistema::BoolInput(string text)
 {
 	bool entradaValida = false; // Al comienzo se toma el input invalido
@@ -161,13 +194,30 @@ bool Sistema::BoolInput(string text)
 
 /*
 	Añade ramos a Alumno o Profesor
+	@param persona Alumno o Profesor a agregarle ramos.
 */
 void Sistema::AgregarRamos(Persona* persona)
 {
+	bool end = false;
 	Ramo* option;
-
-	option = MostrarMenuRamos("== Ramo a agregar ==");
-	
+	while (!end)
+	{
+		option = MostrarMenuRamos("== Ramo a agregar ==", RamosDisponibles(persona));
+		if (option)
+		{
+			if (!persona->getRamos().isFull()) {
+				persona->getRamos().add(option);
+				print("Ramo anadido correctamente");
+				if (!BoolInput("Desea agregar mas ramos? Responda Si o No. ")) { end = true; }
+			}
+			else
+			{
+				alarm("No se ha podido agregar el ramo, se ha excedido el limite");
+				end = true;
+			}
+		}
+		else{	end = true;	}
+	}
 }
 
 /*
@@ -178,8 +228,11 @@ void Sistema::IngresarAlumno(string nombre, string apellido, int semestre, int e
 	if (edad > 0 && edad < 120 && semestre > 0 && semestre < 31){
 		Alumno alumno = Alumno(nombre, apellido, semestre, edad); // Crea un nuevo alumno
 		alumnos.add(alumno); // Añade el alumno
-		if (BoolInput("Desea agregar inmediatamente los ramos? Responda Si o No. ")) {
-			AgregarRamos(&alumno);
+		if (ramos.length > 0)
+		{
+			if (BoolInput("Desea agregar inmediatamente los ramos? Responda Si o No. ")) {
+				AgregarRamos(&alumno);
+			}
 		}
 	}
 	else{
@@ -194,6 +247,12 @@ void Sistema::IngresarProfesor(string nombre, string apellido)
 {
 	Profesor profesor = Profesor(nombre, apellido); // Crea un nuevo profesor
 	profesores.add(profesor); // Añade el profesor
+	if (ramos.length > 0)
+	{
+		if (BoolInput("Desea agregar inmediatamente los ramos? Responda Si o No. ")) {
+			AgregarRamos(&profesor);
+		}
+	}
 }
 
 /*
@@ -299,4 +358,119 @@ Ramo* Sistema::ConsultarRamo(string nombre)
 	}
 
 	return ramoEncontrado; // Devolvemos la referencia
+}
+
+void Sistema::ModificarAlumno(Alumno* busquedaAlumno)
+{
+	int option = 0;
+	string nombre = "";
+	string apellido = "";
+	int semestre = 0;
+	int edad = 0;
+	while (option < 6) {
+		option = MostrarMenu("== Modificar o Eliminar Alumno ( " + busquedaAlumno->getNombreCompleto() + "   Semestre: " + std::to_string(busquedaAlumno->getSemestre()) + " Edad: " + std::to_string(busquedaAlumno->getEdad()) + " ) == ", new string[7]{
+			"Modificar nombre",
+			"Modificar apellido",
+			"Modificar semestre",
+			"Modificar edad",
+			"Agregar ramo",
+			"Eliminar Alumno",
+			"Volver al menu de Modificar elemento"
+			}, 7);
+		switch (option)
+		{
+		case 1:
+			nombre = StringInput("Ingrese el nuevo nombre del Alumno: ");
+			busquedaAlumno->setNombre(nombre);
+			break;
+		case 2:
+			apellido = StringInput("Ingrese el nuevo apellido del Alumno: ");
+			busquedaAlumno->setApellido(nombre);
+			break;
+		case 3:
+			semestre = IntInput("Ingrese el nuevo semestre del Alumno: ");
+			busquedaAlumno->setSemestre(semestre);
+			break;
+		case 4:
+			edad = IntInput("Ingrese la nueva edad del Alumno: ");
+			busquedaAlumno->setEdad(edad);
+			break;
+		case 5:
+			AgregarRamos(busquedaAlumno);
+			break;
+		case 6:
+			alumnos.remove(*busquedaAlumno);
+			alarm("Esta opcion aun no esta implementada");
+			break;
+		}
+	}
+}
+
+void Sistema::ModificarProfesor(Profesor* busquedaProfesor)
+{
+	int option = 0;
+	string nombre = "";
+	string apellido = "";
+	while (option < 4) {
+		option = MostrarMenu("== Modificar o Eliminar Profesor ( " + busquedaProfesor->getNombreCompleto() + " ) == ", new string[5]{
+			"Modificar nombre",
+			"Modificar apellido",
+			"Agregar ramo",
+			"Eliminar Profesor",
+			"Volver al menu de Modificar elemento"
+			}, 5);
+		switch (option)
+		{
+		case 1:
+			nombre = StringInput("Ingrese el nuevo nombre del Profesor: ");
+			busquedaProfesor->setNombre(nombre);
+			break;
+		case 2:
+			apellido = StringInput("Ingrese el nuevo apellido del Profesor: ");
+			busquedaProfesor->setApellido(nombre);
+			break;
+		case 3:
+			AgregarRamos(busquedaProfesor);
+			break;
+		case 4:
+			profesores.remove(*busquedaProfesor);
+			alarm("Esta opcion aun no esta implementada");
+			break;
+		}
+	}
+}
+
+void Sistema::ModificarRamo(Ramo* busquedaRamo)
+{
+	int option = 0;
+	string nombre = "";
+	string carrera = "";
+	string sala = "";
+	while (option < 4) {
+		option = MostrarMenu("== Modificar o Eliminar Ramo ( " + busquedaRamo->getNombre() + "   Semestre: " + busquedaRamo->getCarrera() + " Edad: " + busquedaRamo->getSala() + " ) == ", new string[5]{
+			"Modificar nombre",
+			"Modificar apellido",
+			"Modificar sala",
+			"Eliminar Ramo",
+			"Volver al menu de Modificar elemento"
+			}, 5);
+		switch (option)
+		{
+		case 1:
+			nombre = StringInput("Ingrese el nuevo nombre del Ramo: ");
+			busquedaRamo->setNombre(nombre);
+			break;
+		case 2:
+			carrera = StringInput("Ingrese la nueva carrera del Ramo: ");
+			busquedaRamo->setCarrera(carrera);
+			break;
+		case 3:
+			sala = StringInput("Ingrese la nueva sala del Ramo: ");
+			busquedaRamo->setSala(sala);
+		case 4:
+			ramos.remove(*busquedaRamo);
+			alarm("Esta opcion aun no esta implementada");
+			break;
+		}
+	}
 }

@@ -24,7 +24,8 @@ public:
 	void cleanConsole(); // Permite limpiar la consola
 
 	int MostrarMenu(string titulo, string opciones[], int size); // Muestra un menú por pantalla
-	Ramo* MostrarMenuRamos(string titulo); // Muestra el menu de seleccion de ramos
+	Vector<Ramo*> RamosDisponibles(Persona*);
+	Ramo* MostrarMenuRamos(string titulo, Vector<Ramo*>); // Muestra el menu de seleccion de ramos
 	string StringInput(string texto); // Permite la entrada de un string por consola
 	int IntInput(string); // Permite la entrada de un integer por consola
 	bool BoolInput(string texto); // Permite la entrada de un string por consola y devuelve un bool
@@ -42,4 +43,8 @@ public:
 	Alumno* ConsultarAlumno(string); // Consulta por un alumno y devuelve su puntero
 	Profesor* ConsultarProfesor(string); // Consulta por un profesor y devuelve su puntero
 	Ramo* ConsultarRamo(string); // Consulta por un ramo y devuelve su puntero
+
+	void ModificarAlumno(Alumno*); // Modifica un alumno del sistema
+	void ModificarProfesor(Profesor*); // Modifica un profesor del sistema
+	void ModificarRamo(Ramo*); // Modifica un ramo del sistema
 };

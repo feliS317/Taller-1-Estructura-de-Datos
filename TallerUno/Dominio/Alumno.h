@@ -13,7 +13,7 @@ class Alumno : public Persona
 private:
 	int semestre;
 	int edad;
-	Vector<Ramo> ramos = Vector<Ramo>(5);
+	Vector<Ramo*> ramos = Vector<Ramo*>(5);
 public:
 	Alumno() = default;
 	Alumno(string, string, int, int);
@@ -21,5 +21,5 @@ public:
 	void setSemestre(int);
 	int getEdad();
 	void setEdad(int);
-	bool addRamo(Ramo);
+	Vector<Ramo*> getRamos();
 };
