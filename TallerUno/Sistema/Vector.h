@@ -23,7 +23,7 @@ public:
 	bool isFull(); // Permite saber si una lista está llena
 	int indexOf(T object); // Permite obtener el índice de un elemento en la lista
 	void add(T object); // Añade un elemento al final de la lista
-	void remove(T object); // Remueve un elemento de la lista
+	bool remove(T object); // Remueve un elemento de la lista
 	bool cacheExists(); // Revisa si el cache existe y es distinto de null
 	T& getCache(); // Obtiene el valor del cache
 };
@@ -70,14 +70,28 @@ void Vector<T>::add(T object) {
 };
 
 template <class T>
-void Vector<T>::remove(T object) {
-	if (cache == &lista[length - 1]) { // Si el cache apuntaba al objeto que se eliminará
-		cache = nullptr; // El cache apuntará a null
+bool Vector<T>::remove(T object) {
+	int pos = -1;
+	for (int i = 0; i < length; i++)
+	{
+		if (lista[i] == object)
+		{
+			pos = i;
+			break;
+		}
 	}
-
-	// TODO falta añadir el codigo de quitar un elemento
+	if (pos == -1)
+	{
+		return false;
+	}
+	for (int i = pos; i < length-1; i++)
+	{
+		lista[i] = lista[i + 1];
+	}
+	// TODO falta probar el codigo de quitar un elemento
 
 	length--; // Reduce la cuenta de objetos en uno
+	return true;
 };
 
 

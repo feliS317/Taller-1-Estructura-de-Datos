@@ -35,3 +35,8 @@ Vector<Ramo*> Persona::getRamos()
 {
     return Vector<Ramo*>(0);
 }
+
+bool Persona::addRamo(Ramo*)
+{
+    return false;
+}

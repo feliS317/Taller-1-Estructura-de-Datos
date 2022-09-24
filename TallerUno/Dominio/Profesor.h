@@ -16,4 +16,5 @@ public:
 	Profesor() = default;
 	Profesor(string, string);
 	Vector<Ramo*> getRamos();
+	bool addRamo(Ramo*);
 };

@@ -33,3 +33,13 @@ Vector<Ramo*> Alumno::getRamos()
 {
     return ramos;
 }
+
+bool Alumno::addRamo(Ramo* ramo)
+{
+    if (ramos.isFull())
+    {
+        return false;
+    }
+    ramos.add(ramo);
+    return true;
+}

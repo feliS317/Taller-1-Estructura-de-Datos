@@ -20,4 +20,5 @@ public:
 	void setApellido(string);
 	string getNombreCompleto();
 	virtual Vector<Ramo*> getRamos();
+	virtual bool addRamo(Ramo*);
 };

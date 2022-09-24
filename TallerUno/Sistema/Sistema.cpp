@@ -78,13 +78,17 @@ Vector<Ramo*> Sistema::RamosDisponibles(Persona* persona)
 {
 	bool found;
 	Vector<Ramo*> ramosNoTomados = Vector<Ramo*>(10);
+	cout << persona->getRamos().length;
 	for (int i = 0; i < ramos.length; i++)
 	{
 		found = false;
 		for (int j = 0; j < persona->getRamos().length; j++)
 		{
+			cout << &ramos[i];
+			cout << persona->getRamos()[j];
 			if (&ramos[i] == persona->getRamos()[j])
 			{
+				cout << "Found";
 				found = true;
 				break;
 			}
@@ -200,6 +204,7 @@ void Sistema::ListaRamos(Persona* persona)
 	for (int i = 0; i < persona->getRamos().length; i++) { // Imprime las opciones
 		print("[" + std::to_string(i + 1) + "] " + persona->getRamos()[i]->getNombre() + "  Carrera: " + persona->getRamos()[i]->getCarrera() + "  Sala: " + persona->getRamos()[i]->getSala());
 	}
+	alarm("");
 }
 
 /*
@@ -212,11 +217,11 @@ void Sistema::AgregarRamos(Persona* persona)
 	Ramo* option;
 	while (!end)
 	{
-		option = MostrarMenuRamos("== Ramo a agregar ==", RamosDisponibles(persona));
+		Vector<Ramo*> ramosNoTomados = RamosDisponibles(persona);
+		option = MostrarMenuRamos("== Ramo a agregar ==", ramosNoTomados);
 		if (option)
 		{
-			if (!persona->getRamos().isFull()) {
-				persona->getRamos().add(option);
+			if (persona->addRamo(option)) {
 				print("Ramo anadido correctamente");
 				if (!BoolInput("Desea agregar mas ramos? Responda Si o No. ")) { end = true; }
 			}
@@ -395,7 +400,7 @@ void Sistema::ModificarAlumno(Alumno* busquedaAlumno)
 			break;
 		case 2:
 			apellido = StringInput("Ingrese el nuevo apellido del Alumno: ");
-			busquedaAlumno->setApellido(nombre);
+			busquedaAlumno->setApellido(apellido);
 			break;
 		case 3:
 			semestre = IntInput("Ingrese el nuevo semestre del Alumno: ");
@@ -437,7 +442,7 @@ void Sistema::ModificarProfesor(Profesor* busquedaProfesor)
 			break;
 		case 2:
 			apellido = StringInput("Ingrese el nuevo apellido del Profesor: ");
-			busquedaProfesor->setApellido(nombre);
+			busquedaProfesor->setApellido(apellido);
 			break;
 		case 3:
 			AgregarRamos(busquedaProfesor);
