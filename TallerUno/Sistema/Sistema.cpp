@@ -414,8 +414,9 @@ void Sistema::ModificarAlumno(Alumno* busquedaAlumno)
 			AgregarRamos(busquedaAlumno);
 			break;
 		case 6:
-			alumnos.remove(*busquedaAlumno);
-			alarm("Esta opcion aun no esta implementada");
+			if (alumnos.remove(busquedaAlumno)) {
+				alarm("Alumno eliminado exitosamente");
+			}
 			break;
 		}
 	}
@@ -448,8 +449,10 @@ void Sistema::ModificarProfesor(Profesor* busquedaProfesor)
 			AgregarRamos(busquedaProfesor);
 			break;
 		case 4:
-			profesores.remove(*busquedaProfesor);
-			alarm("Esta opcion aun no esta implementada");
+			if (profesores.remove(busquedaProfesor)) {
+				alarm("Profesor eliminado exitosamente");
+			}
+			
 			break;
 		}
 	}
@@ -483,8 +486,11 @@ void Sistema::ModificarRamo(Ramo* busquedaRamo)
 			sala = StringInput("Ingrese la nueva sala del Ramo: ");
 			busquedaRamo->setSala(sala);
 		case 4:
-			ramos.remove(*busquedaRamo);
-			alarm("Esta opcion aun no esta implementada");
+			if (ramos.remove(busquedaRamo)) {
+				alarm("Ramo eliminado exitosamente");
+				break;
+			}
+			alarm("El ramo no se ha eliminado");
 			break;
 		}
 	}
