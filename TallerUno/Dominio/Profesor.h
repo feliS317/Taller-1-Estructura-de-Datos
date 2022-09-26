@@ -17,4 +17,5 @@ public:
 	Profesor(string, string);
 	Vector<Ramo*> getRamos();
 	bool addRamo(Ramo*);
+	bool removeRamo(Ramo*);
 };

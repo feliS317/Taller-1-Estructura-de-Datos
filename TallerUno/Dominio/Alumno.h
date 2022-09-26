@@ -23,4 +23,5 @@ public:
 	void setEdad(int);
 	Vector<Ramo*> getRamos();
 	bool addRamo(Ramo*);
+	bool removeRamo(Ramo*);
 };

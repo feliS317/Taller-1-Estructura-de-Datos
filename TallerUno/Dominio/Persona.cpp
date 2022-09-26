@@ -40,3 +40,8 @@ bool Persona::addRamo(Ramo*)
 {
     return false;
 }
+
+bool Persona::removeRamo(Ramo*)
+{
+    return false;
+}

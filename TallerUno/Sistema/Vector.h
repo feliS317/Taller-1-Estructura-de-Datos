@@ -85,12 +85,11 @@ bool Vector<T>::remove(T* object) {
 	{
 		return false;
 	}
+	cache = nullptr;
 	for (int i = pos; i < length-1; i++) // Si se encontro en la lista
 	{
 		lista[i] = lista[i + 1]; // Coloca el elemento que le sigue en su posicion
 	}
-	// TODO falta probar el codigo de quitar un elemento
-
 	length--; // Reduce la cuenta de objetos en uno
 	return true;
 };

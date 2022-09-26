@@ -43,3 +43,15 @@ bool Alumno::addRamo(Ramo* ramo)
     ramos.add(ramo);
     return true;
 }
+
+bool Alumno::removeRamo(Ramo* ramo)
+{
+    for (int i = 0; i < ramos.length; i++)
+    {
+        if (ramos.remove(&ramo))
+        {
+            return true;
+        }
+    }
+    return false;
+}

@@ -21,4 +21,5 @@ public:
 	string getNombreCompleto();
 	virtual Vector<Ramo*> getRamos();
 	virtual bool addRamo(Ramo*);
+	virtual bool removeRamo(Ramo*);
 };

@@ -422,11 +422,6 @@ void Sistema::ModificarAlumno(Alumno* busquedaAlumno)
 			AgregarRamos(busquedaAlumno);
 			break;
 		case 6:
-			/*for (int i = 0; i < busquedaAlumno->getRamos().length; i++)
-			{
-				busquedaAlumno->getRamos()[i]->removeAlumno(busquedaAlumno);
-			}
-			*/
 			if (alumnos.remove(busquedaAlumno)) {
 				alarm("Alumno eliminado exitosamente");
 			}
@@ -462,10 +457,6 @@ void Sistema::ModificarProfesor(Profesor* busquedaProfesor)
 			AgregarRamos(busquedaProfesor);
 			break;
 		case 4:
-			/*for (int i = 0; i < busquedaProfesor->getRamos().length; i++)
-			{
-				busquedaProfesor->getRamos()[i]->removeProfesor(busquedaProfesor);
-			}*/
 			if (profesores.remove(busquedaProfesor)) {
 				alarm("Profesor eliminado exitosamente");
 			}
@@ -502,6 +493,14 @@ void Sistema::ModificarRamo(Ramo* busquedaRamo)
 			sala = StringInput("Ingrese la nueva sala del Ramo: ");
 			busquedaRamo->setSala(sala);
 		case 4:
+			for (int i = 0; i < alumnos.length; i++)
+			{
+				alumnos[i].getRamos().remove(&busquedaRamo);
+			}
+			for (int i = 0; i < profesores.length; i++)
+			{
+				profesores[i].getRamos().remove(&busquedaRamo);
+			}
 			if (ramos.remove(busquedaRamo)) {
 				alarm("Ramo eliminado exitosamente");
 				break;
