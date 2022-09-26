@@ -404,16 +404,28 @@ void Sistema::ModificarAlumno(Alumno* busquedaAlumno)
 			break;
 		case 3:
 			semestre = IntInput("Ingrese el nuevo semestre del Alumno: ");
-			busquedaAlumno->setSemestre(semestre);
+			if (semestre > 0 && semestre < 31) {
+				busquedaAlumno->setSemestre(semestre);
+				break;
+			}
+			alarm("Se ha ingresado un valor invalido. El semestre debe estar entre 1 y 30");
 			break;
 		case 4:
 			edad = IntInput("Ingrese la nueva edad del Alumno: ");
-			busquedaAlumno->setEdad(edad);
+			if (edad > 0 && edad < 120) {
+				busquedaAlumno->setEdad(edad);
+				break;
+			}
+			alarm("Se ha ingresado un valor invalido. La edad debe estar entre 1 y 119");
 			break;
 		case 5:
 			AgregarRamos(busquedaAlumno);
 			break;
 		case 6:
+			for (int i = 0; i < busquedaAlumno->getRamos().length; i++)
+			{
+				busquedaAlumno->getRamos()[i]->removeAlumno(busquedaAlumno);
+			}
 			if (alumnos.remove(busquedaAlumno)) {
 				alarm("Alumno eliminado exitosamente");
 			}
@@ -449,10 +461,13 @@ void Sistema::ModificarProfesor(Profesor* busquedaProfesor)
 			AgregarRamos(busquedaProfesor);
 			break;
 		case 4:
+			for (int i = 0; i < busquedaProfesor->getRamos().length; i++)
+			{
+				busquedaProfesor->getRamos()[i]->removeProfesor(busquedaProfesor);
+			}
 			if (profesores.remove(busquedaProfesor)) {
 				alarm("Profesor eliminado exitosamente");
 			}
-			
 			break;
 		}
 	}
@@ -465,9 +480,9 @@ void Sistema::ModificarRamo(Ramo* busquedaRamo)
 	string carrera = "";
 	string sala = "";
 	while (option < 4) {
-		option = MostrarMenu("== Modificar o Eliminar Ramo ( " + busquedaRamo->getNombre() + "   Semestre: " + busquedaRamo->getCarrera() + " Edad: " + busquedaRamo->getSala() + " ) == ", new string[5]{
+		option = MostrarMenu("== Modificar o Eliminar Ramo ( " + busquedaRamo->getNombre() + "   Sala: " + busquedaRamo->getCarrera() + " Edad: " + busquedaRamo->getSala() + " ) == ", new string[5]{
 			"Modificar nombre",
-			"Modificar apellido",
+			"Modificar sala",
 			"Modificar sala",
 			"Eliminar Ramo",
 			"Volver al menu de Modificar elemento"
