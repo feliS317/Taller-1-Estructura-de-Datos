@@ -235,6 +235,23 @@ void Sistema::AgregarRamos(Persona* persona)
 	}
 }
 
+void Sistema::EliminarRamos(Persona* persona)
+{
+	Ramo* option;
+	Vector<Ramo*> ramosTomados = persona->getRamos();
+	option = MostrarMenuRamos("== Ramo a agregar ==", ramosTomados);
+	if (option)
+	{
+		if (persona->addRamo(option)) {
+			print("Ramo eliminado correctamente");
+		}
+		else
+		{
+			alarm("ERROR, no se ha podido eliminar el ramo");
+		}
+	}
+}
+
 /*
 	Crea un nuevo alumno y lo añade al sistema
 */
@@ -382,13 +399,14 @@ void Sistema::ModificarAlumno(Alumno* busquedaAlumno)
 	string apellido = "";
 	int semestre = 0;
 	int edad = 0;
-	while (option < 6) {
-		option = MostrarMenu("== Modificar o Eliminar Alumno ( " + busquedaAlumno->getNombreCompleto() + "   Semestre: " + std::to_string(busquedaAlumno->getSemestre()) + " Edad: " + std::to_string(busquedaAlumno->getEdad()) + " ) == ", new string[7]{
+	while (option < 7) {
+		option = MostrarMenu("== Modificar o Eliminar Alumno ( " + busquedaAlumno->getNombreCompleto() + "   Semestre: " + std::to_string(busquedaAlumno->getSemestre()) + " Edad: " + std::to_string(busquedaAlumno->getEdad()) + " ) == ", new string[8]{
 			"Modificar nombre",
 			"Modificar apellido",
 			"Modificar semestre",
 			"Modificar edad",
 			"Agregar ramo",
+			"Eliminar ramo",
 			"Eliminar Alumno",
 			"Volver al menu de Modificar elemento"
 			}, 7);
@@ -422,6 +440,9 @@ void Sistema::ModificarAlumno(Alumno* busquedaAlumno)
 			AgregarRamos(busquedaAlumno);
 			break;
 		case 6:
+			EliminarRamos(busquedaAlumno);
+			break;
+		case 7:
 			if (alumnos.remove(busquedaAlumno)) {
 				alarm("Alumno eliminado exitosamente");
 			}
@@ -435,11 +456,12 @@ void Sistema::ModificarProfesor(Profesor* busquedaProfesor)
 	int option = 0;
 	string nombre = "";
 	string apellido = "";
-	while (option < 4) {
-		option = MostrarMenu("== Modificar o Eliminar Profesor ( " + busquedaProfesor->getNombreCompleto() + " ) == ", new string[5]{
+	while (option < 5) {
+		option = MostrarMenu("== Modificar o Eliminar Profesor ( " + busquedaProfesor->getNombreCompleto() + " ) == ", new string[6]{
 			"Modificar nombre",
 			"Modificar apellido",
 			"Agregar ramo",
+			"Eliminar ramo",
 			"Eliminar Profesor",
 			"Volver al menu de Modificar elemento"
 			}, 5);
@@ -457,6 +479,9 @@ void Sistema::ModificarProfesor(Profesor* busquedaProfesor)
 			AgregarRamos(busquedaProfesor);
 			break;
 		case 4:
+			EliminarRamos(busquedaProfesor);
+			break;
+		case 5:
 			if (profesores.remove(busquedaProfesor)) {
 				alarm("Profesor eliminado exitosamente");
 			}

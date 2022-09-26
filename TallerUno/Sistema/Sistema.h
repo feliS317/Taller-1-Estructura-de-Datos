@@ -24,7 +24,7 @@ public:
 	void cleanConsole(); // Permite limpiar la consola
 
 	int MostrarMenu(string titulo, string opciones[], int size); // Muestra un menú por pantalla
-	Vector<Ramo*> RamosDisponibles(Persona*);
+	Vector<Ramo*> RamosDisponibles(Persona*); // Muestra los ramos que el alumno/profesor puede tomar
 	Ramo* MostrarMenuRamos(string titulo, Vector<Ramo*>); // Muestra el menu de seleccion de ramos
 	string StringInput(string texto); // Permite la entrada de un string por consola
 	int IntInput(string); // Permite la entrada de un integer por consola
@@ -32,6 +32,7 @@ public:
 
 	void ListaRamos(Persona*); // Entrega la lista de ramos de un alumno o profesor
 	void AgregarRamos(Persona*); // Agrega ramos a alumno o profesor
+	void EliminarRamos(Persona*); // Elimina ramos a alumno o profesor
 
 	void IngresarAlumno(string, string, int, int); // Ingresa un nuevo alumno al sistema
 	void IngresarProfesor(string, string); // Ingresa un nuevo profesor al sistema
