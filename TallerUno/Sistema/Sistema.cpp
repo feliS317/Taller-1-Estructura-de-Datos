@@ -422,10 +422,11 @@ void Sistema::ModificarAlumno(Alumno* busquedaAlumno)
 			AgregarRamos(busquedaAlumno);
 			break;
 		case 6:
-			for (int i = 0; i < busquedaAlumno->getRamos().length; i++)
+			/*for (int i = 0; i < busquedaAlumno->getRamos().length; i++)
 			{
 				busquedaAlumno->getRamos()[i]->removeAlumno(busquedaAlumno);
 			}
+			*/
 			if (alumnos.remove(busquedaAlumno)) {
 				alarm("Alumno eliminado exitosamente");
 			}
@@ -461,10 +462,10 @@ void Sistema::ModificarProfesor(Profesor* busquedaProfesor)
 			AgregarRamos(busquedaProfesor);
 			break;
 		case 4:
-			for (int i = 0; i < busquedaProfesor->getRamos().length; i++)
+			/*for (int i = 0; i < busquedaProfesor->getRamos().length; i++)
 			{
 				busquedaProfesor->getRamos()[i]->removeProfesor(busquedaProfesor);
-			}
+			}*/
 			if (profesores.remove(busquedaProfesor)) {
 				alarm("Profesor eliminado exitosamente");
 			}
