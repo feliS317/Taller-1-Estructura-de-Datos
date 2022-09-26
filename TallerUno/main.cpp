@@ -236,12 +236,6 @@ void realizarConsulta()
 int main()
 {
 	int option = 0;
-;
-	sistema.IngresarAlumno("Cesar", "Munoz", 4, 20);
-	sistema.IngresarAlumno("Hariette", "Diaz", 2, 19);
-	sistema.IngresarRamo("Estructura de Datos", "ICCI", "Sala Y-103");
-	sistema.IngresarRamo("Estadistica", "ICI", "Sala X-104");
-	sistema.IngresarRamo("Dinamica", "ICCI", "Sala X1-30");
 
 	while (option != 4)
 	{
